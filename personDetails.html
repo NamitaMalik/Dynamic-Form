@@ -14,7 +14,7 @@
     Sex : <input type="radio" value="male" name="sex" ng-model="sex">Male
     <input type="radio" name="sex" value="female" ng-model="sex">Female
     <div ng-if="sex=='male'">
-        <ul>
+       Sickness: <ul>
             <li ng-repeat='(key,prop) in data.male track by $index'>
                 <div ng-show="prop.viewType=='text'">
                     {{prop.value}} <input type="text">
@@ -27,7 +27,19 @@
             </li>
         </ul>
     </div>
-    <div ng-if="sex==female">
+    <div ng-if="sex=='female'">
+        Sickness: <ul>
+            <li ng-repeat='(key,prop) in data.female track by $index'>
+                <div ng-show="prop.viewType=='text'">
+                    {{prop.value}} <input type="text">
+                </div>
+                <div ng-show="prop.viewType=='checkbox'">
+                    <div ng-repeat="v in prop.value track by $index">
+                        {{v}} <input type="checkbox">
+                    </div>
+                </div>
+            </li>
+        </ul>
     </div>
 </div>
 </body>
@@ -57,9 +69,10 @@
                     value: "Heath Insurance",
                     viewType: "text"
                 },
-                vehicleInsurance: {
-                    value: "Vehicle Insurance",
-                    viewType: "text"},
+                isMarried:{
+                    value : ["Is Married"],
+                    viewType:"checkbox"
+                },
                 lifeInsurance: {
                     value: "Life Insurance",
                     viewType: "text"
