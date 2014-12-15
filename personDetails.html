@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html ng-app="dynamicForm">
+<head>
+    <title>Dynamic Form</title>
+    <script type="text/javascript" src="angular.min.js">
+    </script>
+</head>
+<body>
+<div ng-controller="FormController">
+    Name:<input type="text">
+    <br>
+    Age : <input type="text">
+    <br>
+    Sex : <input type="radio" value="male" name="sex" ng-model="sex">Male
+    <input type="radio" name="sex" value="female" ng-model="sex">Female
+    <div ng-if="sex=='male'">
+        <ul>
+            <li ng-repeat='(key,prop) in data.male track by $index'>
+                <div ng-show="prop.viewType=='text'">
+                    {{prop.value}} <input type="text">
+                </div>
+                <div ng-show="prop.viewType=='checkbox'">
+                    <div ng-repeat="v in prop.value track by $index">
+                        {{v}} <input type="checkbox">
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div ng-if="sex==female">
+    </div>
+</div>
+</body>
+<script>
+    var dynamicForm = angular.module("dynamicForm", []);
+    dynamicForm.controller("FormController", function ($scope) {
+        $scope.data = {
+            male: {
+                healthInsurance: {
+                    value: "Heath Insurance",
+                    viewType: "text"
+                },
+                vehicleInsurance: {
+                    value: "Vehicle Insurance",
+                    viewType: "text"},
+                lifeInsurance: {
+                    value: "Life Insurance",
+                    viewType: "text"
+                },
+                sick: {
+                    value: ["Typhoid", "Cough", "Cold", "Fever"],
+                    viewType: "checkbox"
+                }
+            },
+            female: {
+                healthInsurance: {
+                    value: "Heath Insurance",
+                    viewType: "text"
+                },
+                vehicleInsurance: {
+                    value: "Vehicle Insurance",
+                    viewType: "text"},
+                lifeInsurance: {
+                    value: "Life Insurance",
+                    viewType: "text"
+                },
+                sick: {
+                    value: ["Typhoid", "Cough", "Cold", "Fever", "Pregnancy"],
+                    viewType: "checkbox"
+                }
+            }
+        };
+
+    });
+</script>
+</html>
