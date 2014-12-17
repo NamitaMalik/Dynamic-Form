@@ -1,0 +1,13 @@
+<div ng-show="prop.viewType=='text'">
+    {{prop.value}} <input type="text">
+</div>
+<div ng-show="prop.viewType=='checkbox'">
+    <div ng-repeat="v in prop.value track by $index">
+        {{v}} <input type="checkbox">
+    </div>
+</div>
+<div ng-show="prop.viewType=='radio'">
+    <div ng-repeat="v in prop.value track by $index">
+        {{v}} <input type="radio" value="{{v}}" name="{{prop.name}}">
+    </div>
+</div>
